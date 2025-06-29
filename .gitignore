@@ -1,0 +1,6 @@
+# Ignore all .class files
+*.class
+
+# Ignore all bin folders at any level
+bin/
+**/bin/
