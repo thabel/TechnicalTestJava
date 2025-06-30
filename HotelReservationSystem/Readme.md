@@ -1,3 +1,7 @@
+# output
+![output](output.png)
+
+
 # Design Questions Analysis
 
 ## Question 1: Single Service Approach

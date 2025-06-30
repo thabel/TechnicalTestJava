@@ -74,22 +74,24 @@ public class Service {
         Users user = findUser(userId);
 
         if (user == null) {
-           throw new IllegalArgumentException("User not found: " + userId);
+           System.err.println("User not found: " + userId);
+           return;
         }
         Room userRoom = findRoom(roomNumber);
         if (userRoom == null) {
-           throw new IllegalArgumentException("Room not found: " + roomNumber);
+           System.err.println("Room not found: " + roomNumber);
+           return;
         }
         // verify order 
         if (checkOut.before(checkIn)) {
-             throw new IllegalArgumentException("Invalid booking period");
-            
+             System.err.println("Invalid booking period");
+            return;
         }
         // verify balances
         boolean isRequestedRommFree = isRoomFree(roomNumber, checkIn, checkOut);
         if (!isRequestedRommFree) {
-            throw new IllegalArgumentException("Room is not available for the specified period");
-         
+            System.err.println("Room is not available for the specified period");
+            return;
         }
         // is balance sufficent ?
 
@@ -98,7 +100,8 @@ public class Service {
 
         // check user balance ?
         if (user.getBalance() < price) {
-            throw new IllegalArgumentException("Insufficient balance. Required: " + price + ", Available: " + user.getBalance());
+            System.err.println("Insufficient balance. Required: " + price + ", Available: " + user.getBalance());
+            return;
         }
 
         Booking newBooking = new Booking(userId, roomNumber, checkIn, checkOut);
